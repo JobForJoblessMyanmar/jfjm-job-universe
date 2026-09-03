@@ -1,0 +1,398 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-bg: #05070f;
+  --color-surface: #0c1220;
+  --color-elevated: #141c30;
+  --color-fg: #eef3ff;
+  --color-muted: #93a0bb;
+  --color-faint: #66738d;
+  --color-accent: #3aa7ff;
+  --color-accent-fg: #041018;
+  --color-jade: #3ee6ff;
+  --color-sand: #f0c36a;
+  --color-danger: #e07a6a;
+  --color-success: #5fd0a5;
+  --color-border: rgb(238 243 255 / 0.12);
+  --color-border-strong: rgb(238 243 255 / 0.22);
+  --font-sans: "Sora", "Padauk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Padauk", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+html, body, #app {
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -8%, rgb(32 110 255 / 0.22), transparent 52%),
+    radial-gradient(ellipse 40% 30% at 88% 8%, rgb(62 230 255 / 0.08), transparent 46%),
+    var(--color-bg);
+  background-attachment: fixed;
+}
+
+.mm {
+  font-family: "Padauk", "Sora", ui-sans-serif, sans-serif;
+  line-height: 1.65;
+}
+
+.star-veil {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  opacity: 0.34;
+  background-image:
+    radial-gradient(1.2px 1.2px at 8% 12%, rgb(238 243 255 / 0.8), transparent),
+    radial-gradient(1px 1px at 22% 38%, rgb(62 230 255 / 0.65), transparent),
+    radial-gradient(1.4px 1.4px at 48% 8%, rgb(238 243 255 / 0.55), transparent),
+    radial-gradient(1px 1px at 72% 22%, rgb(58 167 255 / 0.55), transparent),
+    radial-gradient(1.2px 1.2px at 88% 16%, rgb(240 195 106 / 0.4), transparent),
+    radial-gradient(1px 1px at 36% 64%, rgb(62 230 255 / 0.4), transparent);
+  z-index: 0;
+}
+
+.job-fx {
+  position: relative;
+  overflow: hidden;
+}
+.job-fx .fx-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+.job-fx > *:not(.fx-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+.fx-mist .fx-layer {
+  background: linear-gradient(90deg, transparent, rgb(226 232 240 / 0.1), transparent);
+  animation: mistDrift 7s ease-in-out infinite;
+}
+.fx-pearl .fx-layer {
+  background:
+    radial-gradient(ellipse at 18% 70%, rgb(255 255 255 / 0.16), transparent 12%),
+    radial-gradient(ellipse at 78% 28%, rgb(62 230 255 / 0.12), transparent 14%);
+}
+.fx-ocean {
+  background: linear-gradient(160deg, #082f36, #0c1220) !important;
+}
+.fx-ocean .fx-layer {
+  background: linear-gradient(90deg, transparent, rgb(62 230 255 / 0.14), transparent);
+  animation: mistDrift 5s ease-in-out infinite;
+}
+.fx-moon {
+  background: linear-gradient(160deg, #16182a, #0c1220) !important;
+}
+.fx-moon .fx-layer::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #eef3ff, transparent 70%);
+  opacity: 0.55;
+}
+.fx-sakura {
+  background: linear-gradient(160deg, #2a1520, #0c1220) !important;
+}
+.fx-lotus {
+  background: linear-gradient(160deg, #24141c, #0c1220) !important;
+}
+.fx-ruby {
+  background: linear-gradient(160deg, #2a1016, #0c1220) !important;
+  box-shadow: 0 0 0 1px rgb(224 122 106 / 0.35);
+}
+.fx-emerald, .fx-jade {
+  background: linear-gradient(160deg, #0c241c, #0c1220) !important;
+  box-shadow: 0 0 0 1px rgb(62 230 255 / 0.35);
+}
+.fx-kanote {
+  background: linear-gradient(160deg, #23180e, #0c1220) !important;
+  box-shadow: 0 0 0 1px rgb(240 195 106 / 0.35);
+}
+.fx-kanote .fx-layer {
+  background: repeating-linear-gradient(135deg, transparent 0 14px, rgb(240 195 106 / 0.05) 14px 15px);
+}
+.fx-solar {
+  background: linear-gradient(160deg, #2a1c0c, #0c1220) !important;
+}
+.fx-starlight {
+  background: linear-gradient(160deg, #10162c, #0c1220) !important;
+}
+.fx-starlight .fx-layer {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 70% 20%, #3ee6ff, transparent),
+    radial-gradient(1px 1px at 50% 70%, #3aa7ff, transparent);
+  animation: starTwinkle 3.4s ease-in-out infinite;
+}
+.fx-cosmos {
+  background:
+    radial-gradient(circle at 20% 20%, rgb(58 167 255 / 0.18), transparent 28%),
+    linear-gradient(160deg, #10162c, #05070f) !important;
+}
+.fx-thunder {
+  box-shadow: 0 0 0 1px rgb(62 230 255 / 0.4);
+}
+.fx-thunder .fx-layer {
+  background: linear-gradient(90deg, transparent, rgb(186 230 253 / 0.35), transparent);
+  opacity: 0;
+  animation: thunderFlash 3.2s steps(2) infinite;
+}
+.fx-neon {
+  background: linear-gradient(160deg, #18081c, #061820) !important;
+  box-shadow: 0 0 0 1px rgb(62 230 255 / 0.4);
+}
+.fx-fire {
+  background: linear-gradient(160deg, #2a140c, #0c1220) !important;
+}
+.fx-ice {
+  background: linear-gradient(160deg, #0c1c2a, #0c1220) !important;
+  box-shadow: 0 0 0 1px rgb(186 230 253 / 0.28);
+}
+.fx-crystal {
+  box-shadow: 0 0 0 1px rgb(62 230 255 / 0.55), 0 0 24px rgb(58 167 255 / 0.16);
+}
+.fx-crystal .fx-layer {
+  background: conic-gradient(from 20deg, transparent, rgb(62 230 255 / 0.16), transparent 40%);
+  animation: slowSpin 12s linear infinite;
+}
+.fx-royal {
+  background: linear-gradient(160deg, #24180c, #0c1220) !important;
+  box-shadow: 0 0 0 1px rgb(240 195 106 / 0.5);
+}
+.fx-guardian {
+  box-shadow: 0 0 0 1px rgb(58 167 255 / 0.45), inset 0 0 24px rgb(58 167 255 / 0.08);
+}
+.fx-dragonthrone {
+  background:
+    radial-gradient(circle at 50% 0%, rgb(240 195 106 / 0.18), transparent 40%),
+    linear-gradient(160deg, #2a1a0c, #100c08) !important;
+  box-shadow: 0 0 0 1px rgb(240 195 106 / 0.55);
+}
+.fx-citynetwork {
+  background: linear-gradient(160deg, #081820, #0c1220) !important;
+}
+.fx-citynetwork .fx-layer {
+  background:
+    linear-gradient(28deg, transparent 48%, rgb(58 167 255 / 0.2) 49% 50%, transparent 51%),
+    linear-gradient(-25deg, transparent 48%, rgb(62 230 255 / 0.12) 49% 50%, transparent 51%);
+  background-size: 72px 40px;
+  animation: netSlide 8s linear infinite;
+}
+
+/* JFJM Job Universe premium set */
+.fx-orbring {
+  background:
+    radial-gradient(circle at 80% 20%, rgb(58 167 255 / 0.28), transparent 26%),
+    linear-gradient(160deg, #0a1630, #05070f) !important;
+}
+.fx-orbring .fx-layer {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 42%, rgb(62 230 255 / 0.18) 46%, transparent 50%),
+    conic-gradient(from 40deg, transparent 0 62%, rgb(240 195 106 / 0.22) 70%, transparent 78%);
+  animation: slowSpin 10s linear infinite;
+}
+.fx-pulsar {
+  background: linear-gradient(160deg, #0a1840, #05070f) !important;
+  box-shadow: 0 0 0 1px rgb(58 167 255 / 0.45), 0 0 28px rgb(58 167 255 / 0.18);
+}
+.fx-pulsar .fx-layer {
+  background: radial-gradient(circle at 70% 30%, rgb(62 230 255 / 0.28), transparent 34%);
+  animation: pulsarGlow 2.4s ease-in-out infinite;
+}
+.fx-warp {
+  background: linear-gradient(160deg, #070b18, #0c1220) !important;
+}
+.fx-warp .fx-layer {
+  background: repeating-linear-gradient(
+    100deg,
+    transparent 0 18px,
+    rgb(62 230 255 / 0.08) 18px 20px
+  );
+  animation: warpSlide 1.8s linear infinite;
+}
+.fx-stargate {
+  background: radial-gradient(circle at 50% 120%, rgb(58 167 255 / 0.22), #070b16 55%) !important;
+}
+.fx-stargate .fx-layer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -40%;
+  width: 140%;
+  height: 90%;
+  transform: translateX(-50%);
+  border: 2px solid rgb(62 230 255 / 0.35);
+  border-radius: 50%;
+  box-shadow: 0 0 24px rgb(58 167 255 / 0.25);
+  animation: gatePulse 3s ease-in-out infinite;
+}
+.fx-constellation {
+  background: linear-gradient(160deg, #0a1020, #05070f) !important;
+}
+.fx-constellation .fx-layer {
+  background-image:
+    radial-gradient(1.4px 1.4px at 16% 28%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 42% 18%, #3ee6ff, transparent),
+    radial-gradient(1.4px 1.4px at 68% 32%, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 84% 20%, #3aa7ff, transparent),
+    linear-gradient(28deg, transparent 49%, rgb(238 243 255 / 0.18) 50%, transparent 51%),
+    linear-gradient(-18deg, transparent 49%, rgb(62 230 255 / 0.16) 50%, transparent 51%);
+}
+.fx-meteor {
+  background: linear-gradient(160deg, #101018, #0c1220) !important;
+}
+.fx-meteor .fx-layer {
+  background: linear-gradient(120deg, transparent 40%, rgb(240 195 106 / 0.45), rgb(62 230 255 / 0.2), transparent 62%);
+  background-size: 220% 100%;
+  animation: meteorDash 2.6s linear infinite;
+}
+.fx-hologram {
+  background: linear-gradient(160deg, #071428, #0c1220) !important;
+}
+.fx-hologram .fx-layer {
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 7px,
+    rgb(62 230 255 / 0.07) 7px 8px
+  );
+  animation: holoScan 3.2s linear infinite;
+}
+
+.frame-gold { box-shadow: 0 0 0 1px #f0c36a, 0 0 18px rgb(240 195 106 / 0.18); }
+.frame-jade { box-shadow: 0 0 0 1px #3ee6ff, 0 0 18px rgb(62 230 255 / 0.2); }
+.frame-royal { box-shadow: 0 0 0 2px #f0c36a, 0 0 0 5px rgb(36 24 12 / 0.6); }
+.frame-diamond { box-shadow: 0 0 0 1px #e8f4ff, 0 0 0 4px rgb(58 167 255 / 0.25), 0 0 22px rgb(186 230 253 / 0.2); }
+.frame-orbit {
+  box-shadow:
+    0 0 0 1px #3ee6ff,
+    0 0 0 4px rgb(10 22 48 / 0.8),
+    0 0 0 5px rgb(240 195 106 / 0.55),
+    0 0 22px rgb(58 167 255 / 0.28);
+}
+.frame-jfjm {
+  box-shadow:
+    0 0 0 1px #3aa7ff,
+    0 0 0 6px rgb(8 18 40 / 0.85),
+    0 0 28px rgb(58 167 255 / 0.35);
+}
+
+.title-shimmer {
+  background: linear-gradient(100deg, #eef3ff, #3ee6ff, #3aa7ff, #eef3ff);
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: titleShimmer 4s linear infinite;
+}
+.title-jade { color: #7ae8ff; }
+.title-universe {
+  background: linear-gradient(100deg, #ffffff, #3aa7ff, #3ee6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.title-highlight {
+  box-shadow: inset 4px 0 0 #3aa7ff;
+  padding-left: 10px;
+}
+
+@keyframes mistDrift {
+  50% { transform: translateX(18px); opacity: 0.45; }
+}
+@keyframes starTwinkle {
+  50% { opacity: 0.45; }
+}
+@keyframes thunderFlash {
+  0%, 82%, 100% { opacity: 0; }
+  84%, 90% { opacity: 1; }
+}
+@keyframes slowSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes netSlide {
+  to { background-position: 72px 40px, -72px 40px; }
+}
+@keyframes titleShimmer {
+  to { background-position: 240% center; }
+}
+@keyframes pulsarGlow {
+  50% { opacity: 0.45; transform: scale(1.06); }
+}
+@keyframes warpSlide {
+  to { background-position: 80px 0; }
+}
+@keyframes gatePulse {
+  50% { opacity: 0.45; transform: translateX(-50%) scaleX(1.04); }
+}
+@keyframes meteorDash {
+  to { background-position: 220% 0; }
+}
+@keyframes holoScan {
+  to { background-position: 0 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-layer,
+  .title-shimmer,
+  .star-veil {
+    animation: none !important;
+  }
+}
+
+.suggest-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+  max-height: 200px;
+  overflow: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-elevated);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 0.4);
+}
+.suggest-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: var(--color-fg);
+}
+.suggest-item:hover,
+.suggest-item:focus {
+  background: rgb(58 167 255 / 0.12);
+}
