@@ -81,7 +81,7 @@ function EffectsPage() {
             onClick={() => setTier(item.id)}
             className={cn(
               "h-9 shrink-0 rounded-full px-3 text-xs font-medium",
-              tier === item.id ? "bg-accent text-accent-fg" : "bg-elevated text-muted",
+              tier === item.id ? "hud-chip-on" : "hud-chip",
             )}
           >
             {item.label}
@@ -106,7 +106,7 @@ function EffectsPage() {
 
       <div
         className={cn(
-          "job-fx mb-4 min-h-28 rounded-xl border border-border bg-surface p-4",
+          "job-fx hud-panel mb-4 min-h-28 rounded-xl p-4",
           selected.kind === "background" && `fx-${selected.id}`,
           selected.kind === "frame" && selected.id,
         )}
@@ -138,8 +138,8 @@ function EffectsPage() {
             className={cn(
               "rounded-lg border p-3 text-left",
               selected.id === item.id
-                ? "border-accent bg-elevated"
-                : "border-border bg-surface",
+                ? "border-jade bg-elevated"
+                : "border-border bg-surface/70",
             )}
           >
             <div className="flex items-center justify-between gap-2">
@@ -152,7 +152,7 @@ function EffectsPage() {
       </div>
 
       {user ? (
-        <div className="rounded-xl border border-border bg-surface p-4">
+        <div className="hud-panel rounded-xl p-4">
           <p className="mb-2 text-xs text-muted">Apply to one of your posts</p>
           <select
             className="mb-3 h-11 w-full rounded-md border border-border bg-bg px-3 text-sm"

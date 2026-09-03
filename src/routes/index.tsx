@@ -26,7 +26,7 @@ function HomePage() {
 
   return (
     <AppShell>
-      <p className="mm mb-3 rounded-lg border border-border bg-elevated/70 px-3 py-2 text-center text-sm text-muted">
+      <p className="mm hud-panel mb-3 rounded-lg px-3 py-2 text-center text-sm text-muted">
         {calm}
       </p>
 
@@ -59,9 +59,7 @@ function HomePage() {
             onClick={() => setIndustry(item)}
             className={cn(
               "h-9 shrink-0 rounded-full border px-3 text-xs font-medium",
-              industry === item
-                ? "border-transparent bg-accent text-accent-fg"
-                : "border-border bg-surface text-muted",
+              industry === item ? "hud-chip-on" : "hud-chip",
             )}
           >
             {item}

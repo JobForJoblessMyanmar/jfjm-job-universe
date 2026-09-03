@@ -51,7 +51,7 @@ function LoginPage() {
 
   return (
     <AppShell>
-      <section className="rounded-xl border border-border bg-surface p-5">
+      <section className="hud-panel rounded-xl p-5">
         <h2 className="font-display text-xl font-semibold">Sign in</h2>
         <p className="mm mt-1 text-sm text-muted">
           Job Seeker နဲ့ Employer အတွက် အကောင့်တစ်ခုတည်း။ Email နဲ့ ဝင်ပါ။

@@ -77,7 +77,7 @@ export function JobCard({
   return (
     <article
       className={cn(
-        "job-fx rounded-xl border border-border bg-surface p-4 shadow-[0_8px_28px_rgb(0_0_0/0.28)]",
+        "job-fx hud-panel rounded-xl p-4",
         job.effectBg && `fx-${job.effectBg}`,
         frameClass(job.effectFrame),
         job.highlight && "title-highlight",
@@ -188,14 +188,14 @@ export function JobCard({
           <Link
             to="/job/$id"
             params={{ id: job.id }}
-            className="inline-flex h-11 items-center rounded-md bg-accent px-4 text-sm font-medium text-accent-fg"
+            className="btn-thrust inline-flex h-11 items-center rounded-md px-4 text-sm font-medium"
           >
             Open
           </Link>
           {job.viber ? (
             <a
               href={`viber://chat?number=${job.viber.replace(/\s/g, "")}`}
-              className="inline-flex h-11 items-center rounded-md border border-border bg-elevated px-3 text-sm"
+              className="btn-hud inline-flex h-11 items-center rounded-md px-3 text-sm"
             >
               Viber
             </a>
@@ -203,7 +203,7 @@ export function JobCard({
           {job.phone ? (
             <a
               href={`tel:${job.phone}`}
-              className="inline-flex h-11 items-center gap-1 rounded-md border border-border bg-elevated px-3 text-sm"
+              className="btn-hud inline-flex h-11 items-center gap-1 rounded-md px-3 text-sm"
             >
               <Phone className="size-3.5" /> Call
             </a>
