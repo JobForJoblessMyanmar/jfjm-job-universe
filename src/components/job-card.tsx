@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import {
   Bookmark,
   Heart,
+  Mail,
   MapPin,
   MessageCircle,
   Phone,
@@ -198,6 +199,14 @@ export function JobCard({
               className="btn-hud inline-flex h-11 items-center rounded-md px-3 text-sm"
             >
               Viber
+            </a>
+          ) : null}
+          {job.email ? (
+            <a
+              href={`mailto:${job.email}`}
+              className="btn-hud inline-flex h-11 items-center gap-1 rounded-md px-3 text-sm"
+            >
+              <Mail className="size-3.5" /> Email
             </a>
           ) : null}
           {job.phone ? (

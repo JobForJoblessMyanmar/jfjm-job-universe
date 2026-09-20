@@ -73,6 +73,9 @@ function JobDetail() {
         <p className="mm mt-2 whitespace-pre-line text-sm text-fg/85">
           {item.requirements || "—"}
         </p>
+        {item.extra ? (
+          <p className="mm mt-3 whitespace-pre-line text-sm text-muted">{item.extra}</p>
+        ) : null}
         {item.address ? (
           <p className="mt-3 text-sm text-muted">Address · {item.address}</p>
         ) : null}

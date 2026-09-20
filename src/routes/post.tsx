@@ -15,7 +15,9 @@ import {
   TITLE_SUGGEST,
   YANGON_TOWNSHIPS,
 } from "@/lib/catalog";
+import { JOB_TEMPLATES, parseJfjmPost, type JobDraft } from "@/lib/parse-job";
 import { queryClient } from "@/lib/query";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/post")({ component: PostPage });
 
@@ -41,7 +43,24 @@ function PostPage() {
   const [phone, setPhone] = useState("");
   const [viber, setViber] = useState("");
   const [email, setEmail] = useState("");
+  const [paste, setPaste] = useState("");
   const [busy, setBusy] = useState(false);
+
+  function applyDraft(draft: JobDraft) {
+    setTitle(draft.title);
+    setCompany(draft.companyName);
+    setLocation(draft.location);
+    setSalary(draft.salary);
+    setHeadcount(draft.headcount);
+    setGender(draft.gender);
+    setIndustry(draft.industry);
+    setRequirements(draft.requirements);
+    setExtra(draft.extra);
+    setAddress(draft.address);
+    setPhone(draft.phone);
+    setViber(draft.viber);
+    setEmail(draft.email);
+  }
 
   if (isPending) {
     return (
@@ -54,10 +73,10 @@ function PostPage() {
   if (!user) {
     return (
       <AppShell>
-        <section className="rounded-xl border border-border bg-surface p-6 text-center">
+        <section className="hud-panel rounded-xl p-6 text-center">
           <h2 className="font-display text-xl font-semibold">Post a job</h2>
           <p className="mm mt-2 text-sm text-muted">
-            အလုပ်တင်ရန် sign in လုပ်ပါ။ ပို့စ်တစ်ခုလျှင် {POST_COST} diamonds။
+            JFJM ပို့စ်ကူးထည့်ပြီး ကိုယ်တိုင်တင်နိုင်ပါတယ်။ Sign in လုပ်ပါ။
           </p>
           <Link
             to="/login"
@@ -121,12 +140,12 @@ function PostPage() {
 
   return (
     <AppShell>
-      <section className="rounded-xl border border-border bg-surface p-5">
+      <section className="hud-panel rounded-xl p-5">
         <div className="mb-4 flex items-end justify-between gap-3">
           <div>
             <h2 className="font-display text-xl font-semibold">Post a job</h2>
             <p className="mm mt-1 text-sm text-muted">
-              {POST_COST} diamonds / post · လက်ကျန်{" "}
+              နမူနာကူး သို့မဟုတ် ကိုယ်တိုင်ဖြည့် · {POST_COST}♦ / post · လက်ကျန်{" "}
               <span className="tabular-nums text-sand">{me?.diamonds ?? "—"}</span>
             </p>
           </div>
@@ -148,6 +167,45 @@ function PostPage() {
           </div>
         ) : (
           <form className="grid gap-3" onSubmit={(e) => void submit(e)}>
+            <div>
+              <Label>JFJM ပို့စ် ကူးထည့်ပါ</Label>
+              <Textarea
+                value={paste}
+                onChange={(e) => setPaste(e.target.value)}
+                placeholder="Video Editor - (2) Posts (သာကေတ) …"
+                className="min-h-28"
+              />
+              <Button
+                type="button"
+                variant="secondary"
+                className="mt-2"
+                disabled={!paste.trim()}
+                onClick={() => {
+                  applyDraft(parseJfjmPost(paste));
+                  toast.success("ဖောင်ထဲ ဖြည့်ပြီးပါပြီ — စစ်ပြီး Publish နှိပ်ပါ");
+                }}
+              >
+                ဖောင်ဖြည့်
+              </Button>
+            </div>
+            <div>
+              <p className="mb-1.5 text-xs font-medium text-muted">နမူနာပုံစံ</p>
+              <div className="flex flex-wrap gap-2">
+                {JOB_TEMPLATES.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={cn("hud-chip h-9 rounded-full px-3 text-xs")}
+                    onClick={() => {
+                      applyDraft(item.draft);
+                      toast.success(`${item.label} နမူနာ ဖြည့်ပြီး`);
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
             <SuggestField
               label="Job title"
               value={title}

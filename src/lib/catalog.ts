@@ -39,6 +39,7 @@ export const TITLE_SUGGEST = [
   "Assistant Manager",
   "Bartender",
   "Business Development Executive",
+  "Call Center Agent",
   "Call Center Staff",
   "Cashier",
   "Content Creator",
@@ -60,11 +61,15 @@ export const TITLE_SUGGEST = [
   "Operation Executive",
   "Pharmacy Junior Sale",
   "Receptionist",
+  "Sales & Marketing",
   "Sales Executive",
   "Sales Representative",
   "Senior Accountant",
+  "Senior System Engineer",
   "Social Media Executive",
   "Store Staff",
+  "Video Editor",
+  "Warehouse Assistant",
   "Warehouse Staff",
 ] as const;
 
