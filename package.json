@@ -1,7 +1,9 @@
 {
   "name": "jfjm-job-universe",
   "private": true,
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "sideEffects": false,
   "type": "module",
   "overrides": {

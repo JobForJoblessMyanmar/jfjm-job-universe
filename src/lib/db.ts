@@ -176,6 +176,11 @@ async function createSql(): Promise<Sql> {
         "or a server route loader, never from client code.",
     );
   }
+  if (!databaseUrl && process.env.VERCEL) {
+    throw new Error(
+      "DATABASE_URL is required on Vercel. Create a Neon project and set it in Environment Variables, then Redeploy.",
+    );
+  }
   return dbSource === "neon" ? createNeonSql() : createPgliteSql();
 }
 
