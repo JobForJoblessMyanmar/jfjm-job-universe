@@ -9,6 +9,7 @@ import {
   STARTER_DIAMONDS,
 } from "@/lib/catalog";
 import type { JobCard, JobComment, Profile, TopupRequest } from "@/lib/types";
+import { composeJfjmPost } from "@/lib/parse-job";
 
 type JobRow = {
   id: string;
@@ -376,9 +377,9 @@ const jobInput = z.object({
   headcount: z.string().max(20).optional().nullable(),
   industry: z.string().max(80).optional().nullable(),
   location: z.string().min(1).max(80),
-  salary: z.string().max(80).optional().nullable(),
+  salary: z.string().max(200).optional().nullable(),
   requirements: z.string().max(4000).optional().nullable(),
-  extra: z.string().max(4000).optional().nullable(),
+  extra: z.string().max(8000).optional().nullable(),
   address: z.string().max(240).optional().nullable(),
   phone: z.string().max(30).optional().nullable(),
   viber: z.string().max(30).optional().nullable(),
@@ -400,6 +401,24 @@ export const postJob = createServerFn({ method: "POST" })
       select count(*)::int as n from profiles where is_admin = true
     `;
     const status = (adminCount[0]?.n ?? 0) > 0 ? "pending" : "approved";
+    const body =
+      data.extra && data.extra.includes("#JFJM")
+        ? data.extra
+        : composeJfjmPost({
+            title: data.title.trim(),
+            companyName: data.companyName.trim(),
+            location: data.location.trim(),
+            salary: data.salary || "",
+            headcount: data.headcount || "1",
+            gender: data.gender || "Any",
+            industry: data.industry || "",
+            requirements: data.requirements || "",
+            extra: data.extra || "",
+            address: data.address || "",
+            phone: data.phone || "",
+            viber: data.viber || "",
+            email: data.email || "",
+          });
     await sql`
       insert into jobs (
         id, user_id, title, company_name, gender, headcount, industry, location,
@@ -408,7 +427,7 @@ export const postJob = createServerFn({ method: "POST" })
         ${id}, ${context.userId}, ${data.title.trim()}, ${data.companyName.trim()},
         ${data.gender || null}, ${data.headcount || null}, ${data.industry || null},
         ${data.location.trim()}, ${data.salary || null}, ${data.requirements || null},
-        ${data.extra || null}, ${data.address || null}, ${data.phone || null},
+        ${body}, ${data.address || null}, ${data.phone || null},
         ${data.viber || null}, ${data.email || null}, ${status}
       )
     `;

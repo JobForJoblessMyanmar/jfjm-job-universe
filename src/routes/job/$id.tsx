@@ -68,15 +68,9 @@ function JobDetail() {
       </Link>
       <JobCard job={item} />
 
-      <section className="mt-4 rounded-xl border border-border bg-surface p-4">
-        <h3 className="font-display text-sm font-semibold">Requirements</h3>
-        <p className="mm mt-2 whitespace-pre-line text-sm text-fg/85">
-          {item.requirements || "—"}
-        </p>
-        {item.extra ? (
-          <p className="mm mt-3 whitespace-pre-line text-sm text-muted">{item.extra}</p>
-        ) : null}
-        {item.address ? (
+      <section className="mt-4 hud-panel rounded-xl p-4">
+        <h3 className="font-display text-sm font-semibold">Apply</h3>
+        {item.address && !item.extra?.includes("Location") ? (
           <p className="mt-3 text-sm text-muted">Address · {item.address}</p>
         ) : null}
         <div className="mt-4 flex flex-wrap gap-2">

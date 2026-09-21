@@ -116,7 +116,7 @@ function PostPage() {
           location,
           salary,
           requirements,
-          extra,
+          extra: paste.trim() || extra,
           address,
           phone,
           viber,

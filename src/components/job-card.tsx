@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { applyToJob, toggleLike, toggleSave } from "@/lib/api";
+import { jfjmHeadline } from "@/lib/parse-job";
 import { queryClient } from "@/lib/query";
 import type { JobCard as Job } from "@/lib/types";
 import { cn, formatRelativeTime } from "@/lib/utils";
@@ -39,9 +40,10 @@ export function JobCard({
   compact?: boolean;
 }) {
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false);
-  const preview = job.extra || job.requirements || "";
-  const long = preview.length > 140;
+  const [expanded, setExpanded] = useState(true);
+  const headline = jfjmHeadline(job);
+  const body = job.extra || job.requirements || "";
+  const long = body.length > 900;
 
   async function onLike() {
     try {
@@ -105,13 +107,11 @@ export function JobCard({
             )}
           >
             <Link to="/job/$id" params={{ id: job.id }} className="hover:text-accent">
-              {job.title}
+              {headline}
             </Link>
           </h2>
-          <p className="mt-0.5 text-sm text-muted">
-            {job.companyName}
-            <span className="mx-1.5 text-faint">·</span>
-            <span className="tabular-nums">{formatRelativeTime(job.createdAt)}</span>
+          <p className="mt-0.5 text-xs tabular-nums text-faint">
+            {formatRelativeTime(job.createdAt)}
           </p>
         </div>
         <div className="flex shrink-0 gap-1">
@@ -151,10 +151,10 @@ export function JobCard({
         {job.gender && job.gender !== "Any" ? <Badge tone="muted">{job.gender}</Badge> : null}
       </div>
 
-      {!compact && preview ? (
-        <div className="mm mt-3 text-sm leading-relaxed text-fg/85">
+      {!compact && body ? (
+        <div className="mm mt-3 text-sm leading-relaxed text-fg/90">
           <p className="whitespace-pre-line">
-            {long && !expanded ? `${preview.slice(0, 140)}…` : preview}
+            {long && !expanded ? `${body.slice(0, 900)}…` : body}
           </p>
           {long ? (
             <button

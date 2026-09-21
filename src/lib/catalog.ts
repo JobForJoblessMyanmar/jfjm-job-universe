@@ -118,7 +118,7 @@ export const YANGON_TOWNSHIPS = [
   "Thanlyin",
 ] as const;
 
-export const GENDERS = ["Any", "Male", "Female"] as const;
+export const GENDERS = ["Any", "Male", "Female", "Male/Female"] as const;
 
 export const POST_COST = 40;
 export const STARTER_DIAMONDS = 120;
