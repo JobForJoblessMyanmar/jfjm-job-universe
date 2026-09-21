@@ -20,49 +20,35 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-dvh">
       <div className="star-far" aria-hidden />
-      <div className="star-near" aria-hidden />
-      <div className="planet-horizon" aria-hidden />
-      <div className="meteor-line" aria-hidden />
-      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-xl flex-col px-3 pb-28 pt-4 sm:px-4">
-        <header className="hud-panel mb-4 rounded-xl px-4 py-5 text-center">
-          <div className="logo-orbit">
-            <img
-              src="/brand/jfjm-logo.png?v=4"
-              alt="Job For Jobless Myanmar"
-              width={160}
-              height={160}
-            />
-          </div>
-          <p className="mt-2 text-xs font-medium uppercase tracking-[0.22em] text-jade">
-            Job For Jobless Myanmar
+      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-xl flex-col px-3 pb-28 pt-3 sm:px-4">
+        <header className="hud-panel mb-3 flex items-center gap-3 rounded-xl px-3 py-2">
+          <img
+            src="/brand/jfjm-logo.png?v=5"
+            alt="JFJM"
+            width={44}
+            height={44}
+            className="size-11 shrink-0 object-contain"
+          />
+          <p className="min-w-0 flex-1 truncate font-display text-sm font-semibold">
+            JFJM
           </p>
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
-            JFJM Job Universe
-          </h1>
-          <p className="mm mt-1 text-sm text-muted">
-            ကုမ္ပဏီတိုက်ရိုက် အလုပ်ခေါ်စာများ
-          </p>
-          <div className="mt-4 flex items-center justify-center gap-2">
-            {isPending ? (
-              <div className="h-11 w-28 animate-pulse rounded-md bg-elevated" />
-            ) : (
-              <>
-                <SignedOut>
-                  <Link
-                    to="/login"
-                    className="btn-thrust inline-flex h-11 items-center rounded-md px-5 text-sm font-medium"
-                  >
-                    Sign in
-                  </Link>
-                </SignedOut>
-                <SignedIn>
-                  <div className="btn-hud rounded-md px-2 py-1">
-                    <UserButton />
-                  </div>
-                </SignedIn>
-              </>
-            )}
-          </div>
+          {isPending ? (
+            <div className="h-9 w-20 animate-pulse rounded-md bg-elevated" />
+          ) : (
+            <>
+              <SignedOut>
+                <Link
+                  to="/login"
+                  className="btn-thrust inline-flex h-9 items-center rounded-md px-3 text-sm font-medium"
+                >
+                  Sign in
+                </Link>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </>
+          )}
         </header>
         {children}
       </div>
